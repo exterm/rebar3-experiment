@@ -1,3 +1,7 @@
 [{<<"cowboy">>,{pkg,<<"cowboy">>,<<"1.0.3">>},0},
  {<<"cowlib">>,{pkg,<<"cowlib">>,<<"1.0.1">>},1},
+ {<<"proper">>,
+  {git,"git@github.com:manopapad/proper.git",
+       {ref,"c8c73ee23ba965aa504baa9f1e5e0e74b8f83568"}},
+  0},
  {<<"ranch">>,{pkg,<<"ranch">>,<<"1.1.0">>},1}].

@@ -1,4 +1,4 @@
-.PHONY: compile dialyze release production_release clean activate_kerlang
+.PHONY: compile dialyze release production_release clean activate_kerlang test run stop console
 
 compile:
 	rebar3 compile
@@ -25,3 +25,15 @@ activate_kerlang:
 	@echo
 	@echo "{and then to activate kerl-erlang for the current session:}"
 	@echo ". {path-to-kerl-erlang}/activate"
+
+test:
+	rebar3 eunit
+
+run: release
+	_build/default/rel/myrel/bin/myrel start
+
+stop:
+	_build/default/rel/myrel/bin/myrel stop
+
+console: release
+	_build/default/rel/myrel/bin/myrel console
