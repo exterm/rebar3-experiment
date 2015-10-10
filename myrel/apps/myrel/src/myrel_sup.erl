@@ -3,7 +3,7 @@
 %% @end
 %%%-------------------------------------------------------------------
 
--module('myrel_sup').
+-module(myrel_sup).
 
 -behaviour(supervisor).
 

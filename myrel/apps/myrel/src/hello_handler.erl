@@ -1,33 +1,34 @@
 %%%-------------------------------------------------------------------
-%% @doc myrel public API
+%% @doc example request handler for cowboy
 %% @end
 %%%-------------------------------------------------------------------
 
--module(myrel_app).
-
--behaviour(application).
+-module(hello_handler).
 
 %% Application callbacks
--export([start/2
-        ,stop/1]).
+-export([init/3
+        ,handle/2
+        ,terminate/3]).
 
 %%====================================================================
 %% API
 %%====================================================================
 
-start(_StartType, _StartArgs) ->
-    Dispatch = cowboy_router:compile([
-                                      {'_', [{"/", hello_handler, []}]}
-                                     ]),
-    {ok, _} = cowboy:start_http(my_http_listener, 100, [{port, 8080}],
-                                [{env, [{dispatch, Dispatch}]}]
-                               ),
-    myrel_sup:start_link().
+init(_Type, Req, []) ->
+	{ok, Req, undefined}.
 
 %%--------------------------------------------------------------------
 
-stop(_State) ->
-    ok.
+handle(Req, State) ->
+	{ok, Req2} = cowboy_req:reply(200, [
+		{<<"content-type">>, <<"text/plain">>}
+	], <<"Hello world!\n">>, Req),
+	{ok, Req2, State}.
+
+%%--------------------------------------------------------------------
+
+terminate(_Reason, _Req, _State) ->
+	ok.
 
 %%====================================================================
 %% Internal functions
