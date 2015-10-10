@@ -1,20 +1,16 @@
-.PHONY: compile dialyze release production_release clean activate_kerlang test run stop console
+TARGET = _build/default/rel/myrel/bin/myrel
 
-compile:
-	rebar3 compile
+.PHONY: compile dialyzer release production_release clean activate_kerlang test start stop console
 
-dialyze:
-	rebar3 dialyzer
-
-release:
-	rebar3 release
+compile  \
+dialyzer \
+release  \
+clean:
+	rebar3 $@
 
 production_release:
 	rebar3 as production tar
 # config for the prod profile is in rebar.config
-
-clean:
-	rebar3 clean
 
 activate_kerlang:
 	@echo "To activate kerl-based erlang, install kerl and execute:"
@@ -29,11 +25,7 @@ activate_kerlang:
 test:
 	rebar3 eunit
 
-run: release
-	_build/default/rel/myrel/bin/myrel start
-
-stop:
-	_build/default/rel/myrel/bin/myrel stop
-
+start \
+stop  \
 console: release
-	_build/default/rel/myrel/bin/myrel console
+	$(TARGET) $@
