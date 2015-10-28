@@ -10,7 +10,7 @@ clean:
 
 production_release:
 	rebar3 as production tar
-# config for the prod profile is in rebar.config
+# config for the production profile is in rebar.config
 
 activate_kerlang:
 	@echo "To activate kerl-based erlang, install kerl and execute:"
